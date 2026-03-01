@@ -1,0 +1,5 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/pavlo/Documents/VS Code/OOP/Pavlo-Kupchak/Lab0/main'
+relocations:     []
+...
