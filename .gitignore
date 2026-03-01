@@ -1,6 +1,5 @@
 *.exe
 *.o
 .vscode/
-.DS_Store
-.gitignore
+
 .DS_Store
