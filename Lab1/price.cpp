@@ -64,4 +64,8 @@ void Total(FILE* file, Price& total) {
         multiply(item, quantity);
         add(total, item);
     }
+    
+    cout << "Total price: "; print(total);
+    round(total);
+    cout << "Before payment: "; print(total);
 }
