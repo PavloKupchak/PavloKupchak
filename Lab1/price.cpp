@@ -24,11 +24,12 @@ void multiply(Price& item, int quantity) {
 }
 
 void round(Price& cina) {
-    int ostatok = cina.kop % 10;
-    if (ostatok >= 5)
-        cina.kop = cina.kop + (10 - ostatok);
-    else
-        cina.kop = cina.kop - ostatok;
+  int round = cina.kop % 10;
+  cina.kop = cina.kop / 10 * 10; 
+
+  if (round >= 8) {
+    cina.kop += 10;  
+   }
     transfer(cina);
 }
 
@@ -36,11 +37,30 @@ void print(const Price& cina) {
     cout << cina.hryvnia << " hrn " << cina.kop << " kop" << endl;
 }
 
-void Total(FILE* file, Price& total){
+void Total(FILE* file, Price& total) {
     Price item;
     int quantity;
 
-    while (fscanf(file, "%d %hi %d", &item.hryvnia, &item.kop, &quantity) == 3){
+    while (true) {
+
+        int result = fscanf(file, "%d %hd %d", &item.hryvnia, &item.kop, &quantity);
+        if (result == EOF) break;
+
+        if (result != 3) {
+            cout << "Format error in file!" << endl;
+            return;
+        }
+
+        if (item.hryvnia < 0 || item.kop < 0 || quantity < 0) {
+            cout << "Negative values are not allowed!" << endl;
+            return;
+        }
+
+        if (item.kop >= 100) {
+            cout << "Incorrect number of kopecks!" << endl;
+            return;
+        }
+
         multiply(item, quantity);
         add(total, item);
     }
