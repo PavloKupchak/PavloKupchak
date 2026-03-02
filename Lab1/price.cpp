@@ -47,17 +47,17 @@ void Total(FILE* file, Price& total) {
         if (result == EOF) break;
 
         if (result != 3) {
-            cout << "Format error in file!" << endl;
+            cout << "Format error!" << endl;
             return;
         }
 
         if (item.hryvnia < 0 || item.kop < 0 || quantity < 0) {
-            cout << "Negative values are not allowed!" << endl;
+            cout << "Negative values aren't allowed!" << endl;
             return;
         }
 
         if (item.kop >= 100) {
-            cout << "Incorrect number of kopecks!" << endl;
+            cout << "Incorrect number!" << endl;
             return;
         }
 
