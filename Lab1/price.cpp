@@ -55,12 +55,7 @@ void Total(FILE* file, Price& total) {
             cout << "Negative values aren't allowed!" << endl;
             return;
         }
-
-        if (item.kop >= 100) {
-            cout << "Incorrect number!" << endl;
-            return;
-        }
-
+        
         multiply(item, quantity);
         add(total, item);
     }
