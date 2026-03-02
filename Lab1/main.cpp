@@ -5,7 +5,7 @@ using namespace std;
 
 int main() {
     FILE* my_file = fopen("items.txt", "r");
-    if (!my_file) { 
+    if (my_file == NULL) { 
         cout << "File opening error"; return 1; 
     }
     
@@ -13,7 +13,5 @@ int main() {
     Total(my_file, total);
     fclose(my_file);
 
-    cout << "Total price: "; print(total);
-    round(total);
-    cout << "Before payment: "; print(total);
+    return 0;
 };
