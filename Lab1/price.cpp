@@ -44,7 +44,7 @@ void Total(FILE* file, Price& total) {
     while (true) {
 
         int result = fscanf(file, "%d %hd %d", &item.hryvnia, &item.kop, &quantity);
-        if (result == -1) break;
+        if (result == EOF) break;
 
         if (result != 3) {
             cout << "Format error!" << endl;
@@ -55,7 +55,7 @@ void Total(FILE* file, Price& total) {
             cout << "Negative values aren't allowed!" << endl;
             return;
         }
-        
+
         multiply(item, quantity);
         add(total, item);
     }
