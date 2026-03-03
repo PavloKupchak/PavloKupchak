@@ -40,13 +40,14 @@ void print(const Price& cina) {
 void Total(FILE* file, Price& total) {
     Price item;
     int quantity;
+    char name[50];
 
     while (true) {
 
-        int result = fscanf(file, "%d %hd %d", &item.hryvnia, &item.kop, &quantity);
+        int result = fscanf(file, "%49s %d %hd %d", name, &item.hryvnia, &item.kop, &quantity);
         if (result == EOF) break;
 
-        if (result != 3) {
+        if (result != 4) {
             cout << "Format error!" << endl;
             return;
         }
