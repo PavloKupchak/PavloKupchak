@@ -1,2 +1,2 @@
-Bread 12 6 1
-Milk 55 19 0
+Bread 6 40 10
+Milk 94 8134 121

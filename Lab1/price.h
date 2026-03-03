@@ -10,7 +10,6 @@ struct Price {
     short int kop;
 };
 
-void transfer(Price& cina);
 void add(Price& total, const Price& item);
 void multiply(Price& item, int quantity);
 void round(Price& cina);

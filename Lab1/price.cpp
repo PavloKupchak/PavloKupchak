@@ -4,33 +4,33 @@
 
 using namespace std;
 
-void transfer(Price& cina) {
-    if (cina.kop >= 100) {
-        cina.hryvnia = cina.hryvnia + cina.kop / 100;
-        cina.kop = cina.kop % 100;
-    }
-}
-
-void add(Price& total, const Price& item) {
-    total.hryvnia = total.hryvnia + item.hryvnia;
-    total.kop = total.kop + item.kop;
-    transfer(total);
-}
-
 void multiply(Price& item, int quantity) {
-    item.hryvnia = item.hryvnia * quantity;
-    item.kop = item.kop * quantity;
-    transfer(item);
+    long AllKop = (long)item.hryvnia * 100 + item.kop;
+    AllKop *= quantity;
+    item.hryvnia = AllKop / 100;
+    item.kop = AllKop % 100;
+}
+
+void add(Price& all, const Price& item) {
+    long allKop = (long)all.hryvnia * 100 + all.kop;
+    long itemKop = (long)item.hryvnia * 100 + item.kop;
+
+    allKop += itemKop;
+    all.hryvnia = allKop / 100;
+    all.kop = allKop % 100;
 }
 
 void round(Price& cina) {
-  int round = cina.kop % 10;
-  cina.kop = cina.kop / 10 * 10; 
+    int ostatok = cina.kop % 10;
+    cina.kop = (cina.kop / 10) * 10;
+    if (ostatok >= 8) {
+        cina.kop += 10;
+    }
 
-  if (round >= 8) {
-    cina.kop += 10;  
-   }
-    transfer(cina);
+    if (cina.kop >= 100) {
+        cina.hryvnia += 1;
+        cina.kop -= 100;
+    }
 }
 
 void print(const Price& cina) {
