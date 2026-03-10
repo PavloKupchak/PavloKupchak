@@ -1,4 +1,5 @@
-#pragma once
+#ifndef PRICE_H
+#define PRICE_H
 
 #include <cstdio>
 
@@ -13,3 +14,5 @@ void round(Price& cina);
 void print(const Price& cina);
 
 void Total(const char* filename);
+
+#endif 
