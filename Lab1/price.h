@@ -1,8 +1,5 @@
+#pragma once
 
-#ifndef PRICE_H
-#define PRICE_H
-
-#include <iostream>
 #include <cstdio>
 
 struct Price {
@@ -14,6 +11,5 @@ void add(Price& total, const Price& item);
 void multiply(Price& item, int quantity);
 void round(Price& cina);
 void print(const Price& cina);
-void Total(FILE* file, Price& total);
 
-#endif
+void Total(const char* filename);
