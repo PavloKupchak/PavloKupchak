@@ -28,9 +28,9 @@ void print(const Price& cina) {
     printf("%d hrn %hd kop", cina.hryvnia, cina.kop);
 }
 
-void Total(const char* filename) {
-    FILE* file = fopen(filename, "r");
-    if (!file) {
+void Total(const char* my_file) {
+    FILE* file = fopen(my_file, "r");
+    if (file == NULL) {
         cout << "File opening error!" << endl;
         return;
     }
