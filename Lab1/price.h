@@ -13,6 +13,6 @@ void multiply(Price& item, int quantity);
 void round(Price& cina);
 void print(const Price& cina);
 
-void Total(const char* filename);
+void Total(const char* my_file);
 
 #endif 
