@@ -8,11 +8,15 @@ using namespace std;
 void add(Price& total, const Price& item) {
     total.hryvnia += item.hryvnia;
     total.kop += item.kop;
+    total.hryvnia += total.kop / 100;
+    total.kop %= 100;
 }
 
 void multiply(Price& item, int quantity) {
     item.hryvnia *= quantity;
     item.kop *= quantity;
+    item.hryvnia += item.kop / 100;
+    item.kop %= 100;
 }
 
 void round(Price& cina) {
