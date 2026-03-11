@@ -21,11 +21,14 @@ void multiply(Price& item, int quantity) {
 
 void round(Price& cina) {
     int ostatok = cina.kop % 10;
-    if (ostatok < 8) {
+
+    if (ostatok < 8)
         cina.kop -= ostatok;
-    } else {
+    else
         cina.kop += (10 - ostatok);
-    }
+
+    cina.hryvnia += cina.kop / 100;
+    cina.kop %= 100;
 }
 
 void print(const Price& cina) {
@@ -80,16 +83,10 @@ void Total(const char* my_file) {
 }
     fclose(file);
 
-    total.hryvnia += total.kop / 100;
-    total.kop %= 100;
-
     cout << "Total price: "; print(total);
     cout << endl;
 
     round(total);
-
-    total.hryvnia += total.kop / 100;
-    total.kop %= 100;
 
     cout << "Before payment: "; print(total);
     cout << endl;
