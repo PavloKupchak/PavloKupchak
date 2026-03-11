@@ -46,7 +46,7 @@ void Total(const char* my_file) {
 
     while (true) {
     int result = fscanf(file, "%49s %d %hd %d", name, &item.hryvnia, &item.kop, &quantity);
-    if (result == EOF || result == 0) break;
+    if (result == EOF) break;
 
     if (result != 4) {
         cout << "Input format error!" << endl;
