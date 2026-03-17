@@ -8,11 +8,15 @@ using namespace std;
 void add(Price& total, const Price& item) {
     total.hryvnia += item.hryvnia;
     total.kop += item.kop;
+    total.hryvnia += total.kop / 100;
+    total.kop %= 100;
 }
 
 void multiply(Price& item, int quantity) {
     item.hryvnia *= quantity;
     item.kop *= quantity;
+    item.hryvnia += item.kop / 100;
+    item.kop %= 100;
 }
 
 void round(Price& cina) {
@@ -22,9 +26,6 @@ void round(Price& cina) {
         cina.kop -= ostatok;
     else
         cina.kop += (10 - ostatok);
-
-    cina.hryvnia += cina.kop / 100;
-    cina.kop %= 100;
 }
 
 void print(const Price& cina) {
@@ -79,11 +80,7 @@ void Total(const char* my_file) {
 }
     fclose(file);
 
-    cout << "Total price: "; print(total);
-    cout << endl;
-
     round(total);
-
     cout << "Before payment: "; print(total);
     cout << endl;
 }
