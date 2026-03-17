@@ -22,11 +22,15 @@ void multiply(Price& item, int quantity) {
 void round(Price& cina) {
     int ostatok = cina.kop % 10;
 
-    if (ostatok < 8)
+    if (ostatok < 5)
         cina.kop -= ostatok;
     else
         cina.kop += (10 - ostatok);
+    
+    cina.hryvnia += cina.kop / 100;
+    cina.kop %= 100;
 }
+
 
 void print(const Price& cina) {
     printf("%d hrn %hd kop", cina.hryvnia, cina.kop);
@@ -59,8 +63,7 @@ void Total(const char* my_file) {
         if (extra == '\n') break;
         if (extra != ' ' && extra != '\t' && extra != '\r') {
             cout << "Input format error!" << endl;
-            fclose(file);
-            return;
+            continue;
         }
     }
 
@@ -79,6 +82,8 @@ void Total(const char* my_file) {
     add(total, item);
 }
     fclose(file);
+    
+    cout << "Before rounding: "; print(total); cout << endl;
 
     round(total);
     cout << "Before payment: "; print(total);
