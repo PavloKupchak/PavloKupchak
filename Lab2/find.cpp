@@ -47,6 +47,10 @@ bool containsCross(const Triangle &t, const Point &P) {
            (d1 <= 0 && d2 <= 0 && d3 <= 0);
 }
 
+bool atTheTop(const Triangle& t, const Point& p) {
+    return (fabs(p.x - t.A.x) < 1e-9 && fabs(p.y - t.A.y) < 1e-9) || (fabs(p.x - t.B.x) < 1e-9 && fabs(p.y - t.B.y) < 1e-9) || (fabs(p.x - t.C.x) < 1e-9 && fabs(p.y - t.C.y) < 1e-9);
+}
+
 double checkNumber(const string& prompt) {
     string line;
     double x;
@@ -88,6 +92,7 @@ void run() {
 
     int n;
     while (true) {
+        cout << endl;
         n = (int)checkNumber("Введіть кількість точок: ");
         if (n > 0) break;
         cout << "Кількість точок повинна бути додатною!" << endl;
@@ -102,7 +107,9 @@ void run() {
 
         cout << endl;
         cout << "Метод площ: " << endl;
-        if (onBoundary(T, p))
+        if (atTheTop(T, p))
+            cout << "Точка на вершині" << endl;
+        else if (onBoundary(T, p))
             cout << "Точка на межі" << endl;
         else if (contains(T, p))
             cout << "Точка всередині" << endl;
@@ -111,7 +118,9 @@ void run() {
 
         cout << endl;
         cout << "Метод векторів:" << endl;
-        if (onBoundary(T, p))
+        if (atTheTop(T, p))
+            cout << "Точка на вершині" << endl;
+        else if (onBoundary(T, p))
             cout << "Точка на межі" << endl;
         else if (containsCross(T, p))
             cout << "Точка всередині" << endl;
