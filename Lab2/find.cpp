@@ -47,12 +47,39 @@ bool containsCross(const Triangle &t, const Point &P) {
            (d1 <= 0 && d2 <= 0 && d3 <= 0);
 }
 
+double checkNumber(const string& prompt) {
+    string line;
+    double x;
+
+    while (true) {
+        cout << prompt;
+        getline(cin, line);
+
+        stringstream ss(line);
+        if (ss >> x && ss.eof()) {
+            return x;
+        } else {
+            cout << "Помилка! Введіть число\n";
+        }
+    }
+}
+
 void run() {
     Triangle T;
     cout << "Введіть координати вершин трикутника:" << endl;
-    cout << "A: "; cin >> T.A.x >> T.A.y;
-    cout << "B: "; cin >> T.B.x >> T.B.y;
-    cout << "C: "; cin >> T.C.x >> T.C.y;
+    T.A.x = checkNumber("Ax: ");
+    T.A.y = checkNumber("Ay: ");
+    cout << endl;
+    T.B.x = checkNumber("Bx: ");
+    T.B.y = checkNumber("By: ");
+    cout << endl;
+    T.C.x = checkNumber("Cx: ");
+    T.C.y = checkNumber("Cy: ");
+
+    if (T.A.x == T.B.x && T.A.y == T.B.y || T.B.x == T.C.x && T.B.y == T.C.y || T.C.x == T.A.x && T.C.y == T.A.y) {
+        cout << "Трикутник не може мати однакові вершини!" << endl;
+        return;
+    }
 
     if (isDegenerate(T)) {
         cout << "Трикутник є виродженим!" << endl;
@@ -60,15 +87,21 @@ void run() {
     }
 
     int n;
-    cout << "Кількість точок: ";
-    cin >> n;
-
+    while (true) {
+        n = (int)checkNumber("Введіть кількість точок: ");
+        if (n > 0) break;
+        cout << "Кількість точок повинна бути додатною!" << endl;
+    }
+    
     for (int i = 0; i < n; ++i) {
         Point p;
-        cout << "Точка " << i + 1 << ": ";
-        cin >> p.x >> p.y;
+        cout << endl;
+        cout << "Точка " << i + 1 << ": " << endl;
+        p.x = checkNumber("x: ");
+        p.y = checkNumber("y: ");
 
-        cout << "[Метод площ]     ";
+        cout << endl;
+        cout << "Метод площ: " << endl;
         if (onBoundary(T, p))
             cout << "Точка на межі" << endl;
         else if (contains(T, p))
@@ -76,7 +109,8 @@ void run() {
         else
             cout << "Точка поза трикутником" << endl;
 
-        cout << "[Метод векторів] ";
+        cout << endl;
+        cout << "Метод векторів:" << endl;
         if (onBoundary(T, p))
             cout << "Точка на межі" << endl;
         else if (containsCross(T, p))
