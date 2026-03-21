@@ -22,4 +22,5 @@ bool onBoundary(const Triangle &t, const Point &P);
 bool contains(const Triangle &t, const Point &P);
 bool containsCross(const Triangle &t, const Point &P);
 double checkNumber(const string& prompt);
+bool atTheTop(const Triangle& t, const Point& p);
 void run();
