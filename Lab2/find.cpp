@@ -24,6 +24,12 @@ double gaussArea(const Triangle &t) {
     ) / 2.0;
 }
 
+double perimeter(const Triangle &t) {
+    return distance(t.A, t.B) +
+           distance(t.B, t.C) +
+           distance(t.C, t.A);
+}
+
 double area(const Triangle &t) {
     return heronArea(t);
 }
@@ -55,6 +61,11 @@ Point circumcenter(const Triangle &t) {
     double cx = t.C.x, cy = t.C.y;
 
     double D = 2 * (ax * (by - cy) + bx * (cy - ay) + cx * (ay - by));
+
+    if (fabs(D) < 1e-9) {
+        cout << "Неможливо знайти центр описаного кола (трикутник вироджений або майже вироджений)" << endl;
+        return {0, 0}; 
+    }
 
     return {
         ((ax*ax + ay*ay) * (by - cy) +
@@ -118,7 +129,7 @@ double checkNumber(const string& prompt) {
         if (ss >> x && ss.eof()) {
             return x;
         } else {
-            cout << "Помилка! Введіть число\n";
+            cout << "Помилка! Введіть число" << endl;
         }
     }
 }
@@ -126,7 +137,7 @@ double checkNumber(const string& prompt) {
 void start() {
     Triangle T;
 
-    cout << "Введіть координати трикутника:\n";
+    cout << "Введіть координати трикутника:" << endl;
     T.A.x = checkNumber("Ax: ");
     T.A.y = checkNumber("Ay: ");
     cout << endl;
@@ -146,7 +157,7 @@ void start() {
     }
 
     if (isDegenerate(T)) {
-        cout << "Трикутник вироджений!\n";
+        cout << "Трикутник вироджений!" << endl;
         return;
     }
 
@@ -156,44 +167,45 @@ void start() {
         cout << "\nКількість точок: ";
         n = (int)checkNumber("");
         if (n > 0) break;
-        cout << "Кількість точок має бути більшою за 0\n";
+        cout << "Кількість точок має бути більшою за 0" << endl;
     }
     
     for (int i = 0; i < n; ++i) {
         Point p;
         
-        cout << "\nТочка " << i + 1 << ":\n";
+        cout << "\nТочка " << i + 1 << ":" << endl;
         p.x = checkNumber("x: ");
         p.y = checkNumber("y: ");
         
-        cout << "Площа (Герон):  " << heronArea(T) << "\n";
-        cout << "Площа (Гаусс):  " << gaussArea(T) << "\n";
+        cout << "Площа (Герон):  " << heronArea(T) << endl;
+        cout << "Площа (Гаусс):  " << gaussArea(T) << endl;
+        cout << "Периметр:" << perimeter(T) << endl;
     
         Point c = centroid(T);
         Point ic = incenter(T);
         Point cc = circumcenter(T);
-        cout << "Центр мас (барицентр):   (" << c.x  << ", " << c.y  << ")\n";
-        cout << "Центр вписаного кола:    (" << ic.x << ", " << ic.y << ")\n";
-        cout << "Центр описаного кола:    (" << cc.x << ", " << cc.y << ")\n";
+        cout << "\nЦентр мас (барицентр):   (" << c.x  << ", " << c.y  << ")" << endl;
+        cout << "Центр вписаного кола:    (" << ic.x << ", " << ic.y << ")" << endl;
+        cout << "Центр описаного кола:    (" << cc.x << ", " << cc.y << ")" << endl;
 
-        cout << "\nМетод площ:\n";
+        cout << "\nМетод площ:" << endl;
         if (atTheTop(T, p))
-            cout << "На вершині\n";
+            cout << "На вершині" << endl;
         else if (onBoundary(T, p))
-            cout << "На межі\n";
+            cout << "На межі" << endl;
         else if (contains(T, p))
-            cout << "Всередині\n";
+            cout << "Всередині" << endl;
         else
-            cout << "Поза трикутником\n";
+            cout << "Поза трикутником" << endl;
 
-        cout << "\nМетод векторів:\n";
+        cout << "\nМетод векторів:" << endl;
         if (atTheTop(T, p))
-            cout << "На вершині\n";
+            cout << "На вершині" << endl;
         else if (onBoundary(T, p))
-            cout << "На межі\n";
+            cout << "На межі" << endl;
         else if (containsCross(T, p))
-            cout << "Всередині\n";
+            cout << "Всередині" << endl;
         else
-            cout << "Поза трикутником\n";
+            cout << "Поза трикутником" << endl;
     }
 }
