@@ -176,16 +176,16 @@ void start() {
         p.x = checkNumber("x: ");
         p.y = checkNumber("y: ");
         
-        cout << "Площа (Герон):  " << heronArea(T) << endl;
-        cout << "Площа (Гаусс):  " << gaussArea(T) << endl;
+        cout << "Площа (Герон): " << heronArea(T) << endl;
+        cout << "Площа (Гаусс): " << gaussArea(T) << endl;
         cout << "Периметр:" << perimeter(T) << endl;
     
         Point c = centroid(T);
         Point ic = incenter(T);
         Point cc = circumcenter(T);
-        cout << "\nЦентр мас (барицентр):   (" << c.x  << ", " << c.y  << ")" << endl;
-        cout << "Центр вписаного кола:    (" << ic.x << ", " << ic.y << ")" << endl;
-        cout << "Центр описаного кола:    (" << cc.x << ", " << cc.y << ")" << endl;
+        cout << "\nЦентр мас (барицентр): (" << c.x  << ", " << c.y  << ")" << endl;
+        cout << "Центр вписаного кола: (" << ic.x << ", " << ic.y << ")" << endl;
+        cout << "Центр описаного кола: (" << cc.x << ", " << cc.y << ")" << endl;
 
         cout << "\nМетод площ:" << endl;
         if (atTheTop(T, p))
