@@ -20,8 +20,7 @@ double gaussArea(const Triangle &t) {
     return fabs(
         (t.A.x * (t.B.y - t.C.y) +
          t.B.x * (t.C.y - t.A.y) +
-         t.C.x * (t.A.y - t.B.y))
-    ) / 2.0;
+         t.C.x * (t.A.y - t.B.y))) / 2.0;
 }
 
 double perimeter(const Triangle &t) {
