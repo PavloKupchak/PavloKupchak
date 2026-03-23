@@ -16,12 +16,55 @@ double heronArea(const Triangle &t) {
     return sqrt(max(0.0, s * (s - a) * (s - b) * (s - c)));
 }
 
+double gaussArea(const Triangle &t) {
+    return fabs(
+        (t.A.x * (t.B.y - t.C.y) +
+         t.B.x * (t.C.y - t.A.y) +
+         t.C.x * (t.A.y - t.B.y))
+    ) / 2.0;
+}
+
 double area(const Triangle &t) {
     return heronArea(t);
 }
 
 bool isDegenerate(const Triangle &t) {
     return area(t) < 1e-9;
+}
+
+Point centroid(const Triangle &t) {
+    return {
+        (t.A.x + t.B.x + t.C.x) / 3.0,
+        (t.A.y + t.B.y + t.C.y) / 3.0
+    };
+}
+
+Point incenter(const Triangle &t) {
+    double a = distance(t.B, t.C);
+    double b = distance(t.C, t.A);
+    double c = distance(t.A, t.B);
+    return {
+        (a * t.A.x + b * t.B.x + c * t.C.x) / (a + b + c),
+        (a * t.A.y + b * t.B.y + c * t.C.y) / (a + b + c)
+    };
+}
+
+Point circumcenter(const Triangle &t) {
+    double ax = t.A.x, ay = t.A.y;
+    double bx = t.B.x, by = t.B.y;
+    double cx = t.C.x, cy = t.C.y;
+
+    double D = 2 * (ax * (by - cy) + bx * (cy - ay) + cx * (ay - by));
+
+    return {
+        ((ax*ax + ay*ay) * (by - cy) +
+         (bx*bx + by*by) * (cy - ay) +
+         (cx*cx + cy*cy) * (ay - by)) / D,
+
+        ((ax*ax + ay*ay) * (cx - bx) +
+         (bx*bx + by*by) * (ax - cx) +
+         (cx*cx + cy*cy) * (bx - ax)) / D
+    };
 }
 
 bool onSegment(const Point &A, const Point &B, const Point &P) {
@@ -107,6 +150,7 @@ void start() {
         return;
     }
 
+    
     int n;
     while (true) {
         cout << "\nКількість точок: ";
@@ -114,13 +158,23 @@ void start() {
         if (n > 0) break;
         cout << "Кількість точок має бути більшою за 0\n";
     }
-
+    
     for (int i = 0; i < n; ++i) {
         Point p;
-
+        
         cout << "\nТочка " << i + 1 << ":\n";
         p.x = checkNumber("x: ");
         p.y = checkNumber("y: ");
+        
+        cout << "Площа (Герон):  " << heronArea(T) << "\n";
+        cout << "Площа (Гаусс):  " << gaussArea(T) << "\n";
+    
+        Point c = centroid(T);
+        Point ic = incenter(T);
+        Point cc = circumcenter(T);
+        cout << "Центр мас (барицентр):   (" << c.x  << ", " << c.y  << ")\n";
+        cout << "Центр вписаного кола:    (" << ic.x << ", " << ic.y << ")\n";
+        cout << "Центр описаного кола:    (" << cc.x << ", " << cc.y << ")\n";
 
         cout << "\nМетод площ:\n";
         if (atTheTop(T, p))
