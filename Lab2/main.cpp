@@ -1,6 +1,6 @@
 #include "find.h"
 
 int main() {
-run();
+start();
 return 0;
 }

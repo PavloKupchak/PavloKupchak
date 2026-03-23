@@ -48,7 +48,9 @@ bool containsCross(const Triangle &t, const Point &P) {
 }
 
 bool atTheTop(const Triangle& t, const Point& p) {
-    return (fabs(p.x - t.A.x) < 1e-9 && fabs(p.y - t.A.y) < 1e-9) || (fabs(p.x - t.B.x) < 1e-9 && fabs(p.y - t.B.y) < 1e-9) || (fabs(p.x - t.C.x) < 1e-9 && fabs(p.y - t.C.y) < 1e-9);
+    return (fabs(p.x - t.A.x) < 1e-9 && fabs(p.y - t.A.y) < 1e-9) || 
+           (fabs(p.x - t.B.x) < 1e-9 && fabs(p.y - t.B.y) < 1e-9) || 
+           (fabs(p.x - t.C.x) < 1e-9 && fabs(p.y - t.C.y) < 1e-9);
 }
 
 double checkNumber(const string& prompt) {
@@ -68,7 +70,7 @@ double checkNumber(const string& prompt) {
     }
 }
 
-void run() {
+void start() {
     Triangle T;
     cout << "Введіть координати вершин трикутника:" << endl;
     T.A.x = checkNumber("Ax: ");
@@ -80,7 +82,9 @@ void run() {
     T.C.x = checkNumber("Cx: ");
     T.C.y = checkNumber("Cy: ");
 
-    if (T.A.x == T.B.x && T.A.y == T.B.y || T.B.x == T.C.x && T.B.y == T.C.y || T.C.x == T.A.x && T.C.y == T.A.y) {
+    if (T.A.x == T.B.x && T.A.y == T.B.y || 
+        T.B.x == T.C.x && T.B.y == T.C.y || 
+        T.C.x == T.A.x && T.C.y == T.A.y) {
         cout << "Трикутник не може мати однакові вершини!" << endl;
         return;
     }
