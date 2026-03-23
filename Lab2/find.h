@@ -18,9 +18,11 @@ double cross(const Point &O, const Point &A, const Point &B);
 double heronArea(const Triangle &t);
 double area(const Triangle &t);
 bool isDegenerate(const Triangle &t);
+bool onSegment(const Point &A, const Point &B, const Point &P);
 bool onBoundary(const Triangle &t, const Point &P);
-bool contains(const Triangle &t, const Point &P);
-bool containsCross(const Triangle &t, const Point &P);
-double checkNumber(const string& prompt);
 bool atTheTop(const Triangle& t, const Point& p);
+bool contains(const Triangle &t, const Point &P);      
+bool containsCross(const Triangle &t, const Point &P);  
+double checkNumber(const string& prompt);
+
 void start();

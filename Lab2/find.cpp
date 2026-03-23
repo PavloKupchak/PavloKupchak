@@ -13,7 +13,7 @@ double heronArea(const Triangle &t) {
     double b = distance(t.B, t.C);
     double c = distance(t.C, t.A);
     double s = (a + b + c) / 2;
-    return sqrt(s * (s - a) * (s - b) * (s - c));
+    return sqrt(max(0.0, s * (s - a) * (s - b) * (s - c)));
 }
 
 double area(const Triangle &t) {
@@ -24,33 +24,43 @@ bool isDegenerate(const Triangle &t) {
     return area(t) < 1e-9;
 }
 
+bool onSegment(const Point &A, const Point &B, const Point &P) {
+    return fabs(cross(A, B, P)) < 1e-9 &&
+           min(A.x, B.x) - (1e-9) <= P.x && P.x <= max(A.x, B.x) + (1e-9) &&
+           min(A.y, B.y) - (1e-9) <= P.y && P.y <= max(A.y, B.y) + 1e-9;
+}
+
 bool onBoundary(const Triangle &t, const Point &P) {
-    double d1 = cross(t.A, t.B, P);
-    double d2 = cross(t.B, t.C, P);
-    double d3 = cross(t.C, t.A, P);
-    return (fabs(d1) < 1e-9 || fabs(d2) < 1e-9 || fabs(d3) < 1e-9);
+    return onSegment(t.A, t.B, P) ||
+           onSegment(t.B, t.C, P) ||
+           onSegment(t.C, t.A, P);
+}
+
+bool atTheTop(const Triangle& t, const Point& p) {
+    return (fabs(p.x - t.A.x) < (1e-9) && fabs(p.y - t.A.y) < (1e-9)) || 
+           (fabs(p.x - t.B.x) < (1e-9) && fabs(p.y - t.B.y) < (1e-9)) || 
+           (fabs(p.x - t.C.x) < (1e-9) && fabs(p.y - t.C.y) < (1e-9));
 }
 
 bool contains(const Triangle &t, const Point &P) {
     Triangle T1 = {t.A, t.B, P};
     Triangle T2 = {t.B, t.C, P};
     Triangle T3 = {t.C, t.A, P};
+
     double Ssum = area(T1) + area(T2) + area(T3);
-    return fabs(area(t) - Ssum) < 1e-9;
+    double S = area(t);
+    return fabs(S - Ssum) < (1e-9);
 }
 
 bool containsCross(const Triangle &t, const Point &P) {
     double d1 = cross(t.A, t.B, P);
     double d2 = cross(t.B, t.C, P);
     double d3 = cross(t.C, t.A, P);
-    return (d1 >= 0 && d2 >= 0 && d3 >= 0) ||
-           (d1 <= 0 && d2 <= 0 && d3 <= 0);
-}
 
-bool atTheTop(const Triangle& t, const Point& p) {
-    return (fabs(p.x - t.A.x) < 1e-9 && fabs(p.y - t.A.y) < 1e-9) || 
-           (fabs(p.x - t.B.x) < 1e-9 && fabs(p.y - t.B.y) < 1e-9) || 
-           (fabs(p.x - t.C.x) < 1e-9 && fabs(p.y - t.C.y) < 1e-9);
+    bool has_neg = (d1 < -(1e-9)) || (d2 < -(1e-9)) || (d3 < -(1e-9));
+    bool has_pos = (d1 > (1e-9)) || (d2 > (1e-9)) || (d3 > (1e-9));
+
+    return !(has_neg && has_pos);
 }
 
 double checkNumber(const string& prompt) {
@@ -72,63 +82,64 @@ double checkNumber(const string& prompt) {
 
 void start() {
     Triangle T;
-    cout << "Введіть координати вершин трикутника:" << endl;
+
+    cout << "Введіть координати трикутника:\n";
     T.A.x = checkNumber("Ax: ");
     T.A.y = checkNumber("Ay: ");
     cout << endl;
+
     T.B.x = checkNumber("Bx: ");
     T.B.y = checkNumber("By: ");
     cout << endl;
+
     T.C.x = checkNumber("Cx: ");
     T.C.y = checkNumber("Cy: ");
 
-    if (T.A.x == T.B.x && T.A.y == T.B.y || 
-        T.B.x == T.C.x && T.B.y == T.C.y || 
-        T.C.x == T.A.x && T.C.y == T.A.y) {
-        cout << "Трикутник не може мати однакові вершини!" << endl;
+    if ((fabs(T.A.x - T.B.x) < (1e-9) && fabs(T.A.y - T.B.y) < (1e-9)) ||
+        (fabs(T.B.x - T.C.x) < (1e-9) && fabs(T.B.y - T.C.y) < (1e-9)) ||
+        (fabs(T.C.x - T.A.x) < (1e-9) && fabs(T.C.y - T.A.y) < (1e-9))) {
+        cout << "Трикутник має однакові вершини!\n";
         return;
     }
 
     if (isDegenerate(T)) {
-        cout << "Трикутник є виродженим!" << endl;
+        cout << "Трикутник вироджений!\n";
         return;
     }
 
     int n;
     while (true) {
-        cout << endl;
-        n = (int)checkNumber("Введіть кількість точок: ");
+        cout << "\nКількість точок: ";
+        n = (int)checkNumber("");
         if (n > 0) break;
-        cout << "Кількість точок повинна бути додатною!" << endl;
+        cout << "Кількість точок має бути більшою за 0\n";
     }
-    
+
     for (int i = 0; i < n; ++i) {
         Point p;
-        cout << endl;
-        cout << "Точка " << i + 1 << ": " << endl;
+
+        cout << "\nТочка " << i + 1 << ":\n";
         p.x = checkNumber("x: ");
         p.y = checkNumber("y: ");
 
-        cout << endl;
-        cout << "Метод площ: " << endl;
+        cout << "\nМетод площ:\n";
         if (atTheTop(T, p))
-            cout << "Точка на вершині" << endl;
+            cout << "На вершині\n";
         else if (onBoundary(T, p))
-            cout << "Точка на межі" << endl;
+            cout << "На межі\n";
         else if (contains(T, p))
-            cout << "Точка всередині" << endl;
+            cout << "Всередині\n";
         else
-            cout << "Точка поза трикутником" << endl;
+            cout << "Поза трикутником\n";
 
-        cout << endl;
-        cout << "Метод векторів:" << endl;
+        cout << "\nМетод векторів:\n";
         if (atTheTop(T, p))
-            cout << "Точка на вершині" << endl;
+            cout << "На вершині\n";
         else if (onBoundary(T, p))
-            cout << "Точка на межі" << endl;
+            cout << "На межі\n";
         else if (containsCross(T, p))
-            cout << "Точка всередині" << endl;
+            cout << "Всередині\n";
         else
-            cout << "Точка поза трикутником" << endl;
+            cout << "Поза трикутником\n";
     }
 }
