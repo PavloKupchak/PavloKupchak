@@ -37,46 +37,6 @@ bool isDegenerate(const Triangle &t) {
     return area(t) < 1e-9;
 }
 
-Point centroid(const Triangle &t) {
-    return {
-        (t.A.x + t.B.x + t.C.x) / 3,
-        (t.A.y + t.B.y + t.C.y) / 3
-    };
-}
-
-Point incenter(const Triangle &t) {
-    double a = distance(t.B, t.C);
-    double b = distance(t.C, t.A);
-    double c = distance(t.A, t.B);
-    return {
-        (a * t.A.x + b * t.B.x + c * t.C.x) / (a + b + c),
-        (a * t.A.y + b * t.B.y + c * t.C.y) / (a + b + c)
-    };
-}
-
-Point circumcenter(const Triangle &t) {
-    double ax = t.A.x, ay = t.A.y;
-    double bx = t.B.x, by = t.B.y;
-    double cx = t.C.x, cy = t.C.y;
-
-    double D = 2 * (ax * (by - cy) + bx * (cy - ay) + cx * (ay - by));
-
-    if (fabs(D) < 1e-9) {
-        cout << "Неможливо знайти центр описаного кола (трикутник вироджений або майже вироджений)" << endl;
-        return {0, 0}; 
-    }
-
-    return {
-        ((ax*ax + ay*ay) * (by - cy) +
-         (bx*bx + by*by) * (cy - ay) +
-         (cx*cx + cy*cy) * (ay - by)) / D,
-
-        ((ax*ax + ay*ay) * (cx - bx) +
-         (bx*bx + by*by) * (ax - cx) +
-         (cx*cx + cy*cy) * (bx - ax)) / D
-    };
-}
-
 bool onSegment(const Point &A, const Point &B, const Point &P) {
     return fabs(cross(A, B, P)) < 1e-9 &&
            min(A.x, B.x) - (1e-9) <= P.x && P.x <= max(A.x, B.x) + (1e-9) &&
@@ -179,13 +139,6 @@ void start() {
         cout << "Площа (Герон): " << heronArea(T) << endl;
         cout << "Площа (Гаусс): " << gaussArea(T) << endl;
         cout << "Периметр:" << perimeter(T) << endl;
-    
-        Point c = centroid(T);
-        Point ic = incenter(T);
-        Point cc = circumcenter(T);
-        cout << "\nЦентр мас (барицентр): (" << c.x  << ", " << c.y  << ")" << endl;
-        cout << "Центр вписаного кола: (" << ic.x << ", " << ic.y << ")" << endl;
-        cout << "Центр описаного кола: (" << cc.x << ", " << cc.y << ")" << endl;
 
         cout << "\nМетод площ:" << endl;
         if (atTheTop(T, p))
