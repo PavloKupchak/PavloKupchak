@@ -29,18 +29,29 @@ double perimeter(const Triangle &t) {
            distance(t.C, t.A);
 }
 
-double area(const Triangle &t) {
-    return heronArea(t);
+bool Triangle::contains(const Point &P) const {
+    Triangle T1 = {A, B, P};
+    Triangle T2 = {B, C, P};
+    Triangle T3 = {C, A, P};
+
+    double Ssum = heronArea(T1) + heronArea(T2) + heronArea(T3);
+    double S = heronArea(*this);
+
+    return fabs(S - Ssum) < 1e-9;
+}
+
+double Triangle::area() const {
+    return heronArea(*this);
 }
 
 bool isDegenerate(const Triangle &t) {
-    return area(t) < 1e-9;
+    return t.area() < 1e-9;
 }
 
 bool onSegment(const Point &A, const Point &B, const Point &P) { 
     return fabs(cross(A, B, P)) < 1e-9 &&
-           min(A.x, B.x) - (1e-9) <= P.x && P.x <= max(A.x, B.x) + (1e-9) &&
-           min(A.y, B.y) - (1e-9) <= P.y && P.y <= max(A.y, B.y) + 1e-9;
+           min(A.x, B.x) - 1e-9 <= P.x && P.x <= max(A.x, B.x) + 1e-9 &&
+           min(A.y, B.y) - 1e-9 <= P.y && P.y <= max(A.y, B.y) + 1e-9;
 }
 
 bool onBoundary(const Triangle &t, const Point &P) {
@@ -50,19 +61,9 @@ bool onBoundary(const Triangle &t, const Point &P) {
 }
 
 bool atTheTop(const Triangle& t, const Point& p) {
-    return (fabs(p.x - t.A.x) < (1e-9) && fabs(p.y - t.A.y) < (1e-9)) || 
-           (fabs(p.x - t.B.x) < (1e-9) && fabs(p.y - t.B.y) < (1e-9)) || 
-           (fabs(p.x - t.C.x) < (1e-9) && fabs(p.y - t.C.y) < (1e-9));
-}
-
-bool contains(const Triangle &t, const Point &P) {
-    Triangle T1 = {t.A, t.B, P};
-    Triangle T2 = {t.B, t.C, P};
-    Triangle T3 = {t.C, t.A, P};
-
-    double Ssum = area(T1) + area(T2) + area(T3);
-    double S = area(t);
-    return fabs(S - Ssum) < (1e-9);
+    return (fabs(p.x - t.A.x) < 1e-9 && fabs(p.y - t.A.y) < 1e-9) || 
+           (fabs(p.x - t.B.x) < 1e-9 && fabs(p.y - t.B.y) < 1e-9) || 
+           (fabs(p.x - t.C.x) < 1e-9 && fabs(p.y - t.C.y) < 1e-9);
 }
 
 bool containsCross(const Triangle &t, const Point &P) {
@@ -70,8 +71,8 @@ bool containsCross(const Triangle &t, const Point &P) {
     double d2 = cross(t.B, t.C, P);
     double d3 = cross(t.C, t.A, P);
 
-    bool has_neg = (d1 < -(1e-9)) || (d2 < -(1e-9)) || (d3 < -(1e-9));
-    bool has_pos = (d1 > (1e-9)) || (d2 > (1e-9)) || (d3 > (1e-9));
+    bool has_neg = (d1 < -1e-9) || (d2 < -1e-9) || (d3 < -1e-9);
+    bool has_pos = (d1 > 1e-9) || (d2 > 1e-9) || (d3 > 1e-9);
 
     return !(has_neg && has_pos);
 }
@@ -108,9 +109,9 @@ void start() {
     T.C.x = checkNumber("Cx: ");
     T.C.y = checkNumber("Cy: ");
 
-    if ((fabs(T.A.x - T.B.x) < (1e-9) && fabs(T.A.y - T.B.y) < (1e-9)) ||
-        (fabs(T.B.x - T.C.x) < (1e-9) && fabs(T.B.y - T.C.y) < (1e-9)) ||
-        (fabs(T.C.x - T.A.x) < (1e-9) && fabs(T.C.y - T.A.y) < (1e-9))) {
+    if ((fabs(T.A.x - T.B.x) < 1e-9 && fabs(T.A.y - T.B.y) < 1e-9) ||
+        (fabs(T.B.x - T.C.x) < 1e-9 && fabs(T.B.y - T.C.y) < 1e-9) ||
+        (fabs(T.C.x - T.A.x) < 1e-9 && fabs(T.C.y - T.A.y) < 1e-9)) {
         cout << "Трикутник має однакові вершини!" << endl;
         return;
     }
@@ -135,16 +136,16 @@ void start() {
         p.x = checkNumber("x: ");
         p.y = checkNumber("y: ");
         
-        cout << "Площа (Герон): " << heronArea(T) << endl;
+        cout << "\nПлоща (Герон): " << heronArea(T) << endl;
         cout << "Площа (Гаусс): " << gaussArea(T) << endl;
-        cout << "Периметр:" << perimeter(T) << endl;
+        cout << "Периметр: " << perimeter(T) << endl;
 
         cout << "\nМетод площ:" << endl;
         if (atTheTop(T, p))
             cout << "На вершині" << endl;
         else if (onBoundary(T, p))
             cout << "На межі" << endl;
-        else if (contains(T, p))
+        else if (T.contains(p))
             cout << "Всередині" << endl;
         else
             cout << "Поза трикутником" << endl;
