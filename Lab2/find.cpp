@@ -39,8 +39,8 @@ bool isDegenerate(const Triangle &t) {
 
 Point centroid(const Triangle &t) {
     return {
-        (t.A.x + t.B.x + t.C.x) / 3.0,
-        (t.A.y + t.B.y + t.C.y) / 3.0
+        (t.A.x + t.B.x + t.C.x) / 3,
+        (t.A.y + t.B.y + t.C.y) / 3
     };
 }
 
