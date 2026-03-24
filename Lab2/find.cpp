@@ -129,6 +129,10 @@ void start() {
         cout << "Кількість точок має бути більшою за 0" << endl;
     }
     
+    double areaH = heronArea(T);
+    double areaG = gaussArea(T);
+    double perim = perimeter(T);
+
     for (int i = 0; i < n; ++i) {
         Point p;
         
@@ -136,9 +140,9 @@ void start() {
         p.x = checkNumber("x: ");
         p.y = checkNumber("y: ");
         
-        cout << "\nПлоща (Герон): " << heronArea(T) << endl;
-        cout << "Площа (Гаусс): " << gaussArea(T) << endl;
-        cout << "Периметр: " << perimeter(T) << endl;
+        cout << "\nПлоща (Герон): " << areaH << endl;
+        cout << "Площа (Гаусс): " << areaG << endl;
+        cout << "Периметр: " << perim << endl;
 
         cout << "\nМетод площ:" << endl;
         if (atTheTop(T, p))
