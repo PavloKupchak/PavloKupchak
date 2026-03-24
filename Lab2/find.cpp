@@ -151,7 +151,7 @@ void start() {
     if ((fabs(T.A.x - T.B.x) < (1e-9) && fabs(T.A.y - T.B.y) < (1e-9)) ||
         (fabs(T.B.x - T.C.x) < (1e-9) && fabs(T.B.y - T.C.y) < (1e-9)) ||
         (fabs(T.C.x - T.A.x) < (1e-9) && fabs(T.C.y - T.A.y) < (1e-9))) {
-        cout << "Трикутник має однакові вершини!\n";
+        cout << "Трикутник має однакові вершини!" << endl;
         return;
     }
 
