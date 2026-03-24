@@ -1,6 +1,6 @@
 #include "find.h"
 
-double distance(const Point &p1, const Point &p2) {
+double distance(const Point &p1, const Point &p2) { 
     return sqrt(pow(p2.x - p1.x, 2) + pow(p2.y - p1.y, 2));
 }
 
@@ -37,7 +37,7 @@ bool isDegenerate(const Triangle &t) {
     return area(t) < 1e-9;
 }
 
-bool onSegment(const Point &A, const Point &B, const Point &P) {
+bool onSegment(const Point &A, const Point &B, const Point &P) { 
     return fabs(cross(A, B, P)) < 1e-9 &&
            min(A.x, B.x) - (1e-9) <= P.x && P.x <= max(A.x, B.x) + (1e-9) &&
            min(A.y, B.y) - (1e-9) <= P.y && P.y <= max(A.y, B.y) + 1e-9;
@@ -120,7 +120,6 @@ void start() {
         return;
     }
 
-    
     int n;
     while (true) {
         cout << "\nКількість точок: ";
