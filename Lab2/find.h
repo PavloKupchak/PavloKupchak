@@ -19,11 +19,6 @@ double heronArea(const Triangle &t);
 double gaussArea(const Triangle &t);
 double area(const Triangle &t);
 double perimeter(const Triangle &t);
-
-Point centroid(const Triangle &t);     
-Point incenter(const Triangle &t);   
-Point circumcenter(const Triangle &t); 
-
 bool isDegenerate(const Triangle &t);        
 bool onSegment(const Point &A, const Point &B, const Point &P); 
 bool onBoundary(const Triangle &t, const Point &P);             
