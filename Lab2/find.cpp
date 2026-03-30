@@ -44,7 +44,7 @@ double Triangle::area() const {
 }
 
 bool isDegenerate(const Triangle &t) {
-    return t.area() < 1e-9;
+    return fabs(cross(t.A, t.B, t.C)) < 1e-9;
 }
 
 bool onSegment(const Point &A, const Point &B, const Point &P) { 
