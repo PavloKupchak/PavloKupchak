@@ -30,14 +30,13 @@ double perimeter(const Triangle &t) {
 }
 
 bool Triangle::contains(const Point &P) const {
-    Triangle T1 = {A, B, P};
-    Triangle T2 = {B, C, P};
-    Triangle T3 = {C, A, P};
+     Triangle T1 = {A, B, P};
+     Triangle T2 = {B, C, P};
+     Triangle T3 = {C, A, P};
 
-    double S_main = area();
-    double S_sum = T1.area() + T2.area() + T3.area();
-    return fabs(S_main - S_sum) < (1e-9);
-
+     double S_main = area();
+     double S_sum = T1.area() + T2.area() + T3.area();
+     return fabs(S_main - S_sum) < 1e-9;
 }
 
 double Triangle::area() const {
