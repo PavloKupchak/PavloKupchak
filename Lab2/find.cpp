@@ -112,25 +112,24 @@ void start() {
         (fabs(T.B.x - T.C.x) < 1e-9 && fabs(T.B.y - T.C.y) < 1e-9) ||
         (fabs(T.C.x - T.A.x) < 1e-9 && fabs(T.C.y - T.A.y) < 1e-9)) {
         cout << "Трикутник має однакові вершини!" << endl;
-        return;
     }
 
     if (isDegenerate(T)) {
         cout << "Трикутник вироджений!" << endl;
-        return;
     }
 
     int n;
-    while (true) {
+    while(true) {
         cout << "\nКількість точок: ";
         n = (int)checkNumber("");
         if (n > 0) break;
         cout << "Кількість точок має бути більшою за 0" << endl;
     }
-    
-    double areaH = heronArea(T);
-    double areaG = gaussArea(T);
-    double perim = perimeter(T);
+
+    cout << "\nПлоща (Герон): " << heronArea(T) << endl;
+    cout << "Площа (Гаусс): " << gaussArea(T) << endl;
+    cout << "Периметр: " << perimeter(T) << endl;
+
 
     for (int i = 0; i < n; ++i) {
         Point p;
@@ -139,10 +138,16 @@ void start() {
         p.x = checkNumber("x: ");
         p.y = checkNumber("y: ");
         
-        cout << "\nПлоща (Герон): " << areaH << endl;
-        cout << "Площа (Гаусс): " << areaG << endl;
-        cout << "Периметр: " << perim << endl;
-
+        if (isDegenerate(T)) {
+            if (atTheTop(T, p)) 
+                cout << "На вершині відрізка" << endl;
+            else if (onBoundary(T, p))
+                cout << "На відрізку" << endl;
+            else
+                cout << "За відрізком" << endl;
+            continue;
+        }   
+        
         cout << "\nМетод площ:" << endl;
         if (atTheTop(T, p))
             cout << "На вершині" << endl;
