@@ -138,18 +138,18 @@ void start() {
         p.x = checkNumber("x: ");
         p.y = checkNumber("y: ");
         
-    if (isDegenerate(T)) {
-        if (atTheTop(T, p)) 
-            cout << "На вершині" << endl;
-        else if (onSegment(T.A, T.B, p) ||
-                 onSegment(T.B, T.C, p) ||
-                 onSegment(T.C, T.A, p))
-            cout << "На відрізку" << endl;
-        else
-            cout << "Поза відрізком" << endl;
-        continue;
-    }
-        
+        if (isDegenerate(T)) {
+            if (atTheTop(T, p)) 
+                cout << "На вершині" << endl;
+            else if (onSegment(T.A, T.B, p) ||
+                    onSegment(T.B, T.C, p) ||
+                    onSegment(T.C, T.A, p))
+                cout << "На відрізку" << endl;
+            else
+                cout << "Поза відрізком" << endl;
+            continue;
+        }
+            
         cout << "\nМетод площ:" << endl;
         if (atTheTop(T, p))
             cout << "На вершині" << endl;
