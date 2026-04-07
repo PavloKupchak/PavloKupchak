@@ -20,6 +20,10 @@ double heronArea(const Triangle &t) {
     return sqrt(val);
 }
 
+double heronAreaFixed(const Triangle &t) {
+    return max(heronArea(t), gaussArea(t));
+}
+
 double gaussArea(const Triangle &t) {
     return fabs(
         (t.A.x * (t.B.y - t.C.y) +
@@ -42,7 +46,7 @@ bool Triangle::contains(const Point &P) const {
 }
 
 double Triangle::area() const {
-    return gaussArea(*this); 
+    return heronAreaFixed(*this); 
 }
 
 bool isDegenerate(const Triangle &t) {
