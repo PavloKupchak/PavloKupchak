@@ -17,9 +17,7 @@ double heronArea(const Triangle &t) {
     double s = (a + b + c) / 2.0;
 
     double val = s * (s - a) * (s - b) * (s - c);
-    
     if (val < 0 && fabs(val) < 1e-18) val = 0;
-
     return sqrt(val);
 }
 
@@ -72,8 +70,8 @@ bool containsCross(const Triangle &t, const Point &P) {
     double d1 = cross(t.A,t.B,P);
     double d2 = cross(t.B,t.C,P);
     double d3 = cross(t.C,t.A,P);
-    bool has_neg = (d1<-1e-9)||(d2<-1e-9)||(d3<-1e-9);
-    bool has_pos = (d1>1e-9)||(d2>1e-9)||(d3>1e-9);
+    bool has_neg = (d1 < -1e-7)||(d2< -1e-7)||(d3< -1e-7);
+    bool has_pos = (d1 > 1e-7)||(d2 > 1e-7)||(d3 > 1e-7);
     return !(has_neg && has_pos);
 }
 
