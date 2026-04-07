@@ -14,14 +14,13 @@ double heronArea(const Triangle &t) {
     double a = distance(t.A, t.B);
     double b = distance(t.B, t.C);
     double c = distance(t.C, t.A);
-    double s = (a + b + c) / 2;
-    double val = s * (s - a) * (s - b) * (s - c);
-    if (val < 0 && fabs(val) < 1e-9) val = 0;
-    return sqrt(val);
-}
+    double s = (a + b + c) / 2.0;
 
-double heronAreaFixed(const Triangle &t) {
-    return max(heronArea(t), gaussArea(t));
+    double val = s * (s - a) * (s - b) * (s - c);
+    
+    if (val < 0 && fabs(val) < 1e-18) val = 0;
+
+    return sqrt(val);
 }
 
 double gaussArea(const Triangle &t) {
@@ -42,11 +41,11 @@ bool Triangle::contains(const Point &P) const {
     double S_main = area();
     double S_sum = T1.area() + T2.area() + T3.area();
 
-    return fabs(S_main - S_sum) < 1e-9;
+    return fabs(S_main - S_sum) < 1e-7;
 }
 
 double Triangle::area() const {
-    return heronAreaFixed(*this); 
+    return heronArea(*this); 
 }
 
 bool isDegenerate(const Triangle &t) {
