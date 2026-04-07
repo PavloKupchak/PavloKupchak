@@ -20,7 +20,8 @@ struct Triangle {
 
 double distance(const Point &p1, const Point &p2);
 double cross(const Point &O, const Point &A, const Point &B);
-double heronArea(const Triangle &t);      
+double heronArea(const Triangle &t); 
+double heronAreaFixed(const Triangle &t);     
 double gaussArea(const Triangle &t);     
 double perimeter(const Triangle &t);
 bool isDegenerate(const Triangle &t);
