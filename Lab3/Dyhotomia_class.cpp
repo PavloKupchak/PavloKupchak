@@ -72,14 +72,14 @@ int Dyhotomia_class::newton(double &x) {
             return -1;
         }
 
-        double x_new = x - fx / dfx;
+        double x0 = x - fx / dfx;
 
-        if (fabs(x_new - x) < eps) {
-            x = x_new;
+        if (fabs(x0 - x) < eps) {
+            x = x0;
             return 0;
         }
 
-        x = x_new;
+        x = x0;
     }
 
     cout << "Ньютон не збіжний" << endl;
