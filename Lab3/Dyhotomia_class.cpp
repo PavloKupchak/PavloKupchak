@@ -26,34 +26,32 @@ double Dyhotomia_class::df(double x) {
 }
 
 int Dyhotomia_class::count(double &x) {
-    double left = a;
-    double right = b;
     double mid;
 
-    if (fabs(left) < 1e-12 || fabs(right) < 1e-12) {
+    if (fabs(a) < 1e-12 || fabs(b) < 1e-12) {
         cout << "Інтервал торкається нуля" << endl;
         return -1;
     }
 
-    if (f(left) * f(right) >= 0) {
+    if (f(a) * f(b) >= 0) {
         cout << "Однакові знаки на кінцях інтервалу" << endl;
         return -1;
     }
 
-    while ((right - left) / 2 > eps) {
-        mid = (left + right) / 2;
+    while ((b - a) / 2 > eps) {
+        mid = (a + b) / 2;
 
         if (fabs(mid) < 1e-12) {
             mid = (mid > 0) ? mid + eps : mid - eps;
         }
 
-        if (f(mid) * f(left) < 0)
-            right = mid;
+        if (f(mid) * f(a) < 0)
+            b = mid;
         else
-            left = mid;
+            a = mid;
     }
 
-    x = (left + right) / 2;
+    x = (a + b) / 2;
     return 0;
 }
 
