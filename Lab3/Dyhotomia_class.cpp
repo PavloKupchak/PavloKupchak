@@ -26,7 +26,7 @@ double Dyhotomia_class::df(double x) {
 }
 
 int Dyhotomia_class::count(double &x) {
-    double mid;
+    double c;
 
     if (fabs(a) < 1e-12 || fabs(b) < 1e-12) {
         cout << "Інтервал торкається нуля" << endl;
@@ -39,16 +39,16 @@ int Dyhotomia_class::count(double &x) {
     }
 
     while ((b - a) / 2 > eps) {
-        mid = (a + b) / 2;
+        c = (a + b) / 2;
 
-        if (fabs(mid) < 1e-12) {
-            mid = (mid > 0) ? mid + eps : mid - eps;
+        if (fabs(c) < 1e-12) {
+            c = (c > 0) ? c + eps : c - eps;
         }
 
-        if (f(mid) * f(a) < 0)
-            b = mid;
+        if (f(c) * f(a) < 0)
+            b = c;
         else
-            a = mid;
+            a = c;
     }
 
     x = (a + b) / 2;
