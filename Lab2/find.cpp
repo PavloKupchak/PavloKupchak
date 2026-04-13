@@ -14,7 +14,7 @@ double heronArea(const Triangle &t) {
     double a = distance(t.A, t.B);
     double b = distance(t.B, t.C);
     double c = distance(t.C, t.A);
-    double s = (a + b + c) / 2.0;
+    double s = (a + b + c) / 2;
 
     double val = s * (s - a) * (s - b) * (s - c);
     if (val < 0 && fabs(val) < 1e-18) val = 0;
