@@ -18,4 +18,4 @@ private:
     double df(double x);
 };
 
-#endif  
+#endif

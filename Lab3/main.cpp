@@ -5,7 +5,7 @@ using namespace std;
 
 int main() {
     Dyhotomia_class dyh;
-
+        
     double a, b, eps;
 
     cout << "Введіть інтервал a,b: ";
