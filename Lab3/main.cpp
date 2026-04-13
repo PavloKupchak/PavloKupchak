@@ -44,7 +44,7 @@ int main() {
             if (dyh.newton(x) == 0)
                 cout << "Ньютон x = " << x << endl;
         } else {
-            cout << "Помилка дихотомії" << endl;
+            cout << "Помилка обчислення" << endl;
         }
     }
 
