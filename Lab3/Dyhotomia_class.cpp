@@ -57,12 +57,12 @@ int Dyhotomia_class::count(double &x) {
 
 int Dyhotomia_class::newton(double &x) {
     int max_iter = 1000;
+    if (fabs(x) < 1e-12) {
+        cout << "Початкове наближення x0 не може бути 0" << endl;
+        return -1;
+    }
 
     for (int i = 0; i < max_iter; ++i) {
-        if (fabs(x) < 1e-12) {
-            cout << "Метод Ньютона досяг нуля" << endl;
-            return -1;
-        }
 
         double fx = f(x);
         double dfx = df(x);
@@ -72,14 +72,14 @@ int Dyhotomia_class::newton(double &x) {
             return -1;
         }
 
-        double x0 = x - fx / dfx;
+        double NEWx = x - fx / dfx;
 
-        if (fabs(x0 - x) < eps) {
-            x = x0;
+        if (fabs(NEWx - x) < eps) {
+            x = NEWx;
             return 0;
         }
 
-        x = x0;
+        x = NEWx;
     }
 
     cout << "Ньютон не збіжний" << endl;

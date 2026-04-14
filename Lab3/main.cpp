@@ -1,5 +1,6 @@
 #include "Dyhotomia_class.h"
 #include <iostream>
+#include <iomanip>
 
 using namespace std;
 
@@ -8,7 +9,8 @@ int main() {
         
     double a, b, eps;
 
-    cout << "Введіть інтервал a,b: ";
+    cout << endl;
+    cout << "Введіть інтервал a, b: ";
     cin >> a >> b;
 
     cout << "Введіть допустиму похибку: ";
@@ -16,36 +18,48 @@ int main() {
 
     dyh.setTolerance(eps);
 
-    double x;
+    double xDYHOTOMIA;     
+    double xNEWTON;  
 
     if (a < 0 && b > 0) {
         cout << "Інтервал проходить через 0\n";
 
-        dyh.set_volumes(a, -eps);
-        if (dyh.count(x) == 0) {
-            cout << "Лівий корінь (Дихотомія): " << x << endl;
-            if (dyh.newton(x) == 0)
-                cout << "Лівий корінь (Ньютона): " << x << endl;
+        double delta = 1e-6;
+        dyh.set_volumes(a, -delta);
+        if (dyh.count(xDYHOTOMIA) == 0) {
+            cout << "Лівий корінь (Дихотомія): " 
+                 << fixed << setprecision(6) << xDYHOTOMIA << endl;
+        } else {
+            cout << "Помилка на лівому інтервалі\n";
         }
 
-        dyh.set_volumes(eps, b);
-        if (dyh.count(x) == 0) {
-            cout << "Правий корінь (Дихотомія): " << x << endl;
-            if (dyh.newton(x) == 0)
-                cout << "Правий корінь (Ньютона): " << x << endl;
+        dyh.set_volumes(delta, b);
+        if (dyh.count(xNEWTON) == 0) {
+            cout << "Правий корінь (Дихотомія): " 
+                 << fixed << setprecision(6) << xNEWTON << endl;
+        } else {
+            cout << "Помилка на правому інтервалі\n";
         }
     }
     else {
         dyh.set_volumes(a, b);
 
-        if (dyh.count(x) == 0) {
-            cout << "Дихотомія x = " << x << endl;
-
-            if (dyh.newton(x) == 0)
-                cout << "Ньютон x = " << x << endl;
+        if (dyh.count(xDYHOTOMIA) == 0) {
+            cout << "Дихотомія x = " 
+                 << fixed << setprecision(6) << xDYHOTOMIA << endl;
         } else {
-            cout << "Помилка обчислення" << endl;
+            cout << "Помилка дихотомії\n";
         }
+    }
+
+    cout << "\nМетод Ньютона\n";
+    cout << "Введіть початкове наближення x0: ";
+    cin >> xNEWTON;
+
+    if (dyh.newton(xNEWTON) == 0) {
+        cout << "Ньютон x = " << fixed << setprecision(6) << xNEWTON << endl << endl;
+    } else {
+        cout << "Помилка Ньютона\n";
     }
 
     return 0;
