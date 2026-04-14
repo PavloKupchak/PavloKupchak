@@ -39,11 +39,11 @@ bool Triangle::contains(const Point &P) const {
     double S_main = area();
     double S_sum = T1.area() + T2.area() + T3.area();
 
-    return fabs(S_main - S_sum) < 1e-7;
+    return fabs(S_main - S_sum) < 1e-12;
 }
 
 double Triangle::area() const {
-    return heronArea(*this); 
+    return gaussArea(*this); 
 }
 
 bool isDegenerate(const Triangle &t) {
@@ -70,8 +70,8 @@ bool containsCross(const Triangle &t, const Point &P) {
     double d1 = cross(t.A,t.B,P);
     double d2 = cross(t.B,t.C,P);
     double d3 = cross(t.C,t.A,P);
-    bool has_neg = (d1 < -1e-7)||(d2< -1e-7)||(d3< -1e-7);
-    bool has_pos = (d1 > 1e-7)||(d2 > 1e-7)||(d3 > 1e-7);
+    bool has_neg = (d1 < -1e-12)||(d2< -1e-12)||(d3< -1e-12);
+    bool has_pos = (d1 > 1e-12)||(d2 > 1e-12)||(d3 > 1e-12);
     return !(has_neg && has_pos);
 }
 
@@ -112,6 +112,18 @@ void start() {
         Point p;
         cout << "\nТочка " << i+1 << ":\n";
         p.x = checkNumber("x: "); p.y = checkNumber("y: ");
+
+        if (isDegenerate(T)) {
+            if(atTheTop(T,p)) 
+                cout << "На вершині\n";
+            else if(onSegment(T.A,T.B,p) || 
+                    onSegment(T.B,T.C,p) || 
+                    onSegment(T.C,T.A,p)) 
+                cout << "На відрізку\n";
+            else 
+                cout << "Поза відрізком\n";
+            continue;
+        }
 
         cout << "\nМетод площ:\n";
         if(atTheTop(T,p)) cout << "На вершині\n";
