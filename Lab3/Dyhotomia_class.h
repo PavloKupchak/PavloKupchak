@@ -9,8 +9,8 @@ public:
     void setTolerance(double vol_eps);
     int count(double &x);
     int newton(double &x);
-    double f(double x); // перенесено
-    double df(double x); // перенесено
+    double f(double x); 
+    double df(double x);
 
 private:
     double a; 
