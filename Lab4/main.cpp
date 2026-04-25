@@ -1,6 +1,5 @@
 #include "NewZavit.h"
 #include "Koran.h"
-#include "Biblia.h"
 
 int main()
 {

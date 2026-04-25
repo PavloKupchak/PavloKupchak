@@ -80,6 +80,7 @@ int Dyhotomia_class::newton(double &x) {
         }
 
         x = NEWx;
+        cout << "Кількість ітерацій " << i + 1 << " NEWx: " << NEWx << endl;
     }
 
     cout << "Ньютон не збіжний" << endl;

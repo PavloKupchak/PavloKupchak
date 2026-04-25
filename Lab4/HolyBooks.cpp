@@ -30,7 +30,6 @@ int HolyBooks::religion() {
     return 1;
 }
 
-int HolyBooks::showInfo()
-{
+int HolyBooks::showInfo() {
     return religion();
 }
