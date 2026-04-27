@@ -21,8 +21,7 @@ void HolyBooks::god() {
 }
 
 void HolyBooks::religion() {
-    std::cout << name << " was written in " << country
-              << " in the year " << year << std::endl;
+    std::cout << name << " was written in " << country << " in the year " << year << std::endl;
 }
 
 void HolyBooks::showInfo() {
