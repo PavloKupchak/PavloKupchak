@@ -1,9 +1,8 @@
 #pragma once
 #include "HolyBooks.h"
 
-class Biblia : public HolyBooks
-{
+class Biblia : public HolyBooks {
 public:
     Biblia();
-    int god() override;
+    void god() override;
 };

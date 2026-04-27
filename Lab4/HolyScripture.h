@@ -2,8 +2,7 @@
 #include "Biblia.h"
 #include <string>
 
-class HolyScripture : public Biblia
-{
+class HolyScripture : public Biblia {
 protected:
     std::string zavit;
 

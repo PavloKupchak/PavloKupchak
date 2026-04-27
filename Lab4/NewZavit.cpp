@@ -1,9 +1,7 @@
 #include "NewZavit.h"
 #include <iostream>
 
-NewZavit::NewZavit(std::string zavit_name, std::string countOfBooksNewZavit, std::string primaryLanguageNewZavit) : HolyScripture(zavit_name)
-{
-    setZavit(zavit_name);
+NewZavit::NewZavit(std::string zavit_name, std::string countOfBooksNewZavit, std::string primaryLanguageNewZavit) : HolyScripture(zavit_name) {
     setCountOfBooks(countOfBooksNewZavit);
     setPrimaryLanguage(primaryLanguageNewZavit);
 

@@ -7,7 +7,6 @@ Koran::Koran() {
     setCountry("Saudi Arabia");
 }
 
-int Koran::god() {
+void Koran::god() {
     std::cout << "The god of this book is: Allah" << std::endl;
-    return 1;
 }
