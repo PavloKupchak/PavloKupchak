@@ -7,9 +7,17 @@ HolyBooks::HolyBooks() {
     country = "Unknown";
 }
 
-int HolyBooks::setName(std::string name_book) { name = name_book; return 1; }
-int HolyBooks::setYear(int year_found) { year = year_found; return 1; }
-int HolyBooks::setCountry(std::string country_written) { country = country_written; return 1; }
+int HolyBooks::setName(std::string name_book) { 
+    name = name_book; return 1; 
+}
+
+int HolyBooks::setYear(int year_found) { 
+    year = year_found; return 1; 
+
+}
+int HolyBooks::setCountry(std::string country_written) { 
+    country = country_written; return 1; 
+}
 
 int HolyBooks::god() {
     std::cout << std::endl;
