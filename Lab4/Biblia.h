@@ -4,5 +4,6 @@
 class Biblia : public HolyBooks {
 public:
     Biblia();
-    void god() override;
+    int god() override;
+    int god(std::string question) override;
 };

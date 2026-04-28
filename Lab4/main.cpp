@@ -3,15 +3,20 @@
 #include "Biblia.h"
 
 int main() {
-    HolyBooks* book1 = new NewZavit("New Zavit", "27", "Greek");
-    book1->showInfo();
-    book1->god();
-    delete book1;
+    HolyBooks* book;
+    book = new NewZavit("New Zavit", "27", "Greek");
+    book->showInfo();
+    book->showInfo("Hebrew, Aramaic, Ancient Greek");
+    book->god();
+    book->god("Who created this religion?");
+    delete book;
 
-    HolyBooks* book2 = new Koran();
-    book2->showInfo();
-    book2->god();
-    delete book2;
+    book = new Koran();
+    book->showInfo();
+    book->showInfo("Arabic");
+    book->god();
+    book->god("Who created this religion?");
+    delete book;
 
     return 0;
 }

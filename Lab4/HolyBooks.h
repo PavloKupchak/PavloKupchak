@@ -8,17 +8,18 @@ private:
     std::string country;
 
 public:
-    HolyBooks() = default;
-
+    HolyBooks();
     virtual ~HolyBooks() = default;
 
     int setName(std::string name_book);
     int setYear(int year_found);
     int setCountry(std::string country_written);
 
-    virtual void god();
-    void showInfo();
+    virtual int god();
+    virtual int god(std::string question);
+    int showInfo();
+    int showInfo(std::string language);
 
 protected:
-    void religion();
+    int religion();
 };

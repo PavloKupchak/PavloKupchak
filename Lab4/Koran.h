@@ -4,5 +4,6 @@
 class Koran : public HolyBooks {
 public:
     Koran();
-    void god() override;
+    int god() override;
+    int god(std::string question) override;
 };

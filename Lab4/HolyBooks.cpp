@@ -1,29 +1,41 @@
 #include "HolyBooks.h"
 #include <iostream>
 
-int HolyBooks::setName(std::string name_book) {
-    name = name_book;
-    return 1;
+HolyBooks::HolyBooks() {
+    name = "Unknown";
+    year = 0;
+    country = "Unknown";
 }
 
-int HolyBooks::setYear(int year_found) {
-    year = year_found;
-    return 1;
-}
+int HolyBooks::setName(std::string name_book) { name = name_book; return 1; }
+int HolyBooks::setYear(int year_found) { year = year_found; return 1; }
+int HolyBooks::setCountry(std::string country_written) { country = country_written; return 1; }
 
-int HolyBooks::setCountry(std::string country_written) {
-    country = country_written;
-    return 1;
-}
-
-void HolyBooks::god() {
+int HolyBooks::god() {
+    std::cout << std::endl;
     std::cout << "The god of this book is:" << std::endl;
+    return 1;
 }
 
-void HolyBooks::religion() {
+int HolyBooks::god(std::string question) {
+    std::cout << std::endl;
+    std::cout << "Question: " << question << std::endl;
+    std::cout << "The god of this book is:" << std::endl;
+    return 1;
+}
+
+int HolyBooks::religion() {
     std::cout << name << " was written in " << country << " in the year " << year << std::endl;
+    return 1;
 }
 
-void HolyBooks::showInfo() {
-    religion();
+int HolyBooks::showInfo() {
+    std::cout << std::endl;
+    return religion();
+}
+
+int HolyBooks::showInfo(std::string language) {
+    std::cout << "Language: " << language << std::endl;
+    std::cout << std::endl;
+    return religion();
 }
