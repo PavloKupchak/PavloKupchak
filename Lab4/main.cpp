@@ -3,8 +3,7 @@
 #include "Biblia.h"
 
 int main() {
-    HolyBooks* book;
-    book = new NewZavit("New Zavit", "27", "Greek");
+    HolyBooks* book = new NewZavit("New Zavit", "27", "Greek");
     book->showInfo();
     book->showInfo("Hebrew, Aramaic, Ancient Greek");
     book->god();
