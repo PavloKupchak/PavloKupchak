@@ -39,6 +39,8 @@ int main() {
     std::cout << std::endl;
     delete book3;
     std::cout << std::endl;
+    delete book4;
+    std::cout << std::endl;
 
     return 0;
 }
