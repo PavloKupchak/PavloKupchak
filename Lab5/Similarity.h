@@ -1,8 +1,9 @@
 #pragma once 
 #include "Biblia.h"
 #include "Koran.h"
+#include "Torah.h"
 
-class Similarity : public Biblia, public Koran {
+class Similarity : public Biblia, public Koran, public Torah {
 public:
     Similarity();
     ~Similarity();

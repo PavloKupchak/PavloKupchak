@@ -3,7 +3,7 @@
 
 Similarity::Similarity() {
     std::cout << "! Constructor of Similarity class called" << std::endl;
-    setName("Biblia and Koran");
+    setName("Biblia, Koran and Torah");
     setYear(0);
     setCountry("Different countries");
 }

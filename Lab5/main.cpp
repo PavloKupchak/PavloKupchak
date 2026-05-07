@@ -20,10 +20,17 @@ int main() {
     book2->god("Who created this religion?");
 
     std::cout << "======================================================" << std::endl;
-    Similarity* book3 = new Similarity();
+    HolyBooks* book3 = new Torah();
     book3->showInfo();
+    book3->showInfo("Hebrew");
     book3->god();
-    book3->god("Who is the god of this books?");
+    book3->god("Who created this religion?");
+
+    std::cout << "======================================================" << std::endl;
+    Similarity* book4 = new Similarity();
+    book4->showInfo();
+    book4->god();
+    book4->god("Who is the god of this books?");
 
     std::cout << "======================================================" << std::endl;
     delete book1;
