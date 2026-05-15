@@ -13,7 +13,7 @@ Avesta::~Avesta() {
 }
 
 int Avesta::god() {
-    std::cout << "The god of this bookd is: God" << std::endl;
+    std::cout << "The god of this book is: God" << std::endl;
     return 1;
 }
 
